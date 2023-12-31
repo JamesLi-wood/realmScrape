@@ -55,6 +55,6 @@ async function scrape() {
   return character;
 }
 
-module.export = {
+module.exports = {
   getPlayer: scrape,
 };
