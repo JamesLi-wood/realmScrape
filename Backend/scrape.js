@@ -18,11 +18,13 @@ async function scrape() {
     .first()
     .children();
 
+  // Gets all text based information.
   const info = [];
   htmlElement.each((idx, data) => {
     info.push($(data).text());
   });
 
+  // Gets the position of the character sprite.
   let characterSprite = htmlElement
     .eq(0)
     .children()
@@ -31,6 +33,7 @@ async function scrape() {
   characterSprite[1] = `${parseInt(characterSprite[1]) + 250}px`;
   characterSprite = characterSprite.join(" ");
 
+  // Gets the position of the equipment sprites.
   const equipmentSprite = [];
   htmlElement
     .eq(5)
