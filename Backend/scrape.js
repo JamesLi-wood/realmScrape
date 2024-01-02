@@ -34,12 +34,12 @@ async function scrape() {
   characterSprite = characterSprite.join(" ");
 
   // Gets the position of the equipment sprites.
-  const equipmentSprite = [];
+  const equipmentSprites = [];
   htmlElement
     .eq(5)
     .children()
     .each((idx, data) => {
-      equipmentSprite.push(
+      equipmentSprites.push(
         $(data).children().children().css("background-position")
       );
     });
@@ -50,7 +50,7 @@ async function scrape() {
     deathDate: info[2],
     baseFame: info[3],
     totalFame: info[4],
-    equipment: equipmentSprite,
+    equipments: equipmentSprites,
     stats: info[6],
     diedTo: info[7],
   };
