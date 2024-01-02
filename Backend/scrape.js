@@ -18,11 +18,13 @@ async function scrape() {
     .first()
     .children();
 
+  // Gets all text based information.
   const info = [];
   htmlElement.each((idx, data) => {
     info.push($(data).text());
   });
 
+  // Gets the position of the character sprite.
   let characterSprite = htmlElement
     .eq(0)
     .children()
@@ -31,12 +33,13 @@ async function scrape() {
   characterSprite[1] = `${parseInt(characterSprite[1]) + 250}px`;
   characterSprite = characterSprite.join(" ");
 
-  const equipmentSprite = [];
+  // Gets the position of the equipment sprites.
+  const equipmentSprites = [];
   htmlElement
     .eq(5)
     .children()
     .each((idx, data) => {
-      equipmentSprite.push(
+      equipmentSprites.push(
         $(data).children().children().css("background-position")
       );
     });
@@ -47,7 +50,7 @@ async function scrape() {
     deathDate: info[2],
     baseFame: info[3],
     totalFame: info[4],
-    equipment: equipmentSprite,
+    equipments: equipmentSprites,
     stats: info[6],
     diedTo: info[7],
   };
