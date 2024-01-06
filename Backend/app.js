@@ -10,11 +10,14 @@ async function getCharacter() {
   });
 }
 
-async function dbRecentOldest(position) {
-  // position can be -1 (recent) or 1 (oldest).
+/**
+ * @param {Object} query
+ * Query value can either be -1 or 1.
+ */
+async function dbLowestHighest(collection, query) {
   return await db
-    .collection("characters")
-    .findOne({}, { sort: { deathDate: position } })
+    .collection(collection)
+    .findOne({}, { sort: query })
     .then((data) => {
       return data;
     });
@@ -32,7 +35,7 @@ connectToDb((err) => {
 });
 
 // setTimeout(async () => {
-//   await db.collection("characters").insertMany(await getCharacterInfo());
+//   await db.collection("characters").insertMany(await getCharacter());
 //   console.log("added");
 // }, 100);
 
@@ -43,22 +46,33 @@ connectToDb((err) => {
 
 setInterval(async () => {
   const websiteRecent = await getCharacter();
-  const dbRecent = await dbRecentOldest(-1);
+  const dbRecent = await dbLowestHighest("characters", { deathDate: -1 });
 
   if (
     websiteRecent.deathDate !== dbRecent.deathDate &&
     websiteRecent.name !== "Private"
   ) {
     await db.collection("characters").deleteOne({
-      _id: await dbRecentOldest(1).then((data) => {
-        return data._id;
-      }),
+      _id: await dbLowestHighest("characters", { deathDate: 1 }).then(
+        (data) => {
+          return data._id;
+        }
+      ),
     });
     await db.collection("characters").insertOne(websiteRecent);
 
-    console.log("replaced");
+    const lowestFame = await dbLowestHighest("topDeaths", { baseFame: 1 });
+    if (websiteRecent.baseFame > lowestFame.baseFame) {
+      await db
+        .collection("topDeaths")
+        .updateOne({ _id: lowestFame._id }, [{ $set: websiteRecent }]);
+
+      console.log("A new character has made it in the topDeaths leaderboard!");
+    }
+
+    console.log("A character has been added to the graveyard!");
   } else {
-    console.log("nothing happened");
+    console.log("Nothing happened!");
   }
 }, 5000);
 
@@ -72,6 +86,20 @@ app.get("/graveyard", async (req, res) => {
     .collection("characters")
     .find()
     .sort({ deathDate: -1 })
+    .forEach((chars) => {
+      characters.push(chars);
+    })
+    .then(() => {
+      res.send(characters);
+    });
+});
+
+app.get("/topDeaths", async (req, res) => {
+  const characters = [];
+  await db
+    .collection("topDeaths")
+    .find()
+    .sort({ baseFame: -1 })
     .forEach((chars) => {
       characters.push(chars);
     })
