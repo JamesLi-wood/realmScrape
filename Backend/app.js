@@ -1,14 +1,8 @@
 const express = require("express");
-const player = require("./scrape");
+const webScrape = require("./scrape");
 const { connectToDb, getDb } = require("./mongo");
 const app = express();
 const port = 5000;
-
-async function getCharacter() {
-  return player.getPlayer().then((data) => {
-    return data;
-  });
-}
 
 /**
  * @param {Object} query
@@ -45,7 +39,7 @@ connectToDb((err) => {
 // }, 100);
 
 setInterval(async () => {
-  const websiteRecent = await getCharacter();
+  const websiteRecent = await webScrape.getRecentDeath();
   const dbRecent = await dbLowestHighest("characters", { deathDate: -1 });
 
   if (
@@ -80,7 +74,7 @@ app.get("/", (req, res) => {
   res.end("Welcome to realm scrape!");
 });
 
-app.get("/graveyard", async (req, res) => {
+app.get("/recentDeaths", async (req, res) => {
   const characters = [];
   await db
     .collection("characters")
@@ -106,4 +100,8 @@ app.get("/topDeaths", async (req, res) => {
     .then(() => {
       res.send(characters);
     });
+});
+
+app.get("/topCharacters", async (req, res) => {
+  res.send(await webScrape.getTopCharacters());
 });
