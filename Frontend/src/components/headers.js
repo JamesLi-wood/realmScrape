@@ -15,6 +15,9 @@ const Header = () => {
           <li>
             <Link to="/topDeaths">TOP DEATHS</Link>
           </li>
+          <li>
+            <Link to="/topCharacters">TOP CHARACTERS</Link>
+          </li>
         </ul>
       </nav>
     </header>
