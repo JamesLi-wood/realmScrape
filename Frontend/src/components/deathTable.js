@@ -21,7 +21,7 @@ const DeathTable = (props) => {
           <th>Died On</th>
           <th>Base Fame</th>
           <th>Total Fame</th>
-          <th>Equipment</th>
+          <th>Equipments</th>
           <th>Stats</th>
           <th>Killed by</th>
         </tr>
