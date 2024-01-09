@@ -21,7 +21,7 @@ const DeathTable = (props) => {
           <th>Died On</th>
           <th>Base Fame</th>
           <th>Total Fame</th>
-          <th>Equipment</th>
+          <th>Equipments</th>
           <th>Stats</th>
           <th>Killed by</th>
         </tr>
@@ -46,15 +46,16 @@ const DeathTable = (props) => {
               <td>{character.baseFame}</td>
               <td>{character.totalFame}</td>
               <td>
-                {character.equipments.map((position, idx) => {
-                  return (
-                    <span
-                      key={idx}
-                      className="equipment"
-                      style={{ backgroundPosition: position }}
-                    ></span>
-                  );
-                })}
+                {character.equipments &&
+                  character.equipments.map((position, idx) => {
+                    return (
+                      <span
+                        key={idx}
+                        className="equipment"
+                        style={{ backgroundPosition: position }}
+                      ></span>
+                    );
+                  })}
               </td>
               <td>{character.stats}</td>
               <td>{character.diedTo}</td>
