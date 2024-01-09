@@ -1,11 +1,11 @@
+import Header from "../components/headers";
 import { useEffect, useState } from "react";
-import "./deathTable.css";
 
-const DeathTable = (props) => {
+const TopCharacters = () => {
   const [backendData, setBackendData] = useState([]);
 
   useEffect(() => {
-    fetch(props.apiRoute)
+    fetch("/topCharacters")
       .then((res) => (res.ok ? res.json() : false))
       .then((data) => {
         setBackendData(data);
@@ -16,14 +16,12 @@ const DeathTable = (props) => {
     return (
       <thead>
         <tr>
+          <th>Place</th>
           <th>Sprite</th>
           <th>Name</th>
-          <th>Died On</th>
           <th>Base Fame</th>
-          <th>Total Fame</th>
-          <th>Equipment</th>
-          <th>Stats</th>
-          <th>Killed by</th>
+          <th>Class</th>
+          <th>Equipments</th>
         </tr>
       </thead>
     );
@@ -32,9 +30,10 @@ const DeathTable = (props) => {
   function display() {
     return (
       <tbody>
-        {backendData.map((character) => {
+        {backendData.map((character, idx) => {
           return (
-            <tr key={character._id}>
+            <tr key={idx}>
+              <td>{idx + 1}</td>
               <td>
                 <span
                   className="sprite"
@@ -42,9 +41,8 @@ const DeathTable = (props) => {
                 ></span>
               </td>
               <td>{character.name}</td>
-              <td>{character.deathDate}</td>
               <td>{character.baseFame}</td>
-              <td>{character.totalFame}</td>
+              <td>{character.class}</td>
               <td>
                 {character.equipments.map((position, idx) => {
                   return (
@@ -56,8 +54,6 @@ const DeathTable = (props) => {
                   );
                 })}
               </td>
-              <td>{character.stats}</td>
-              <td>{character.diedTo}</td>
             </tr>
           );
         })}
@@ -67,6 +63,8 @@ const DeathTable = (props) => {
 
   return (
     <>
+      <Header />
+      <div className="guild-name">Top Characters</div>
       {backendData ? (
         <table className="graveyard">
           {display()}
@@ -79,4 +77,4 @@ const DeathTable = (props) => {
   );
 };
 
-export default DeathTable;
+export default TopCharacters;
