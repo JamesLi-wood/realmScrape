@@ -9,3 +9,6 @@
 
 ## Database used
 - mongodb
+
+## Others
+- dotenv
