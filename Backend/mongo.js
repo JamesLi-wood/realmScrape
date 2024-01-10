@@ -1,11 +1,14 @@
 const { MongoClient } = require("mongodb");
+require("dotenv").config();
+
 let connection;
+let uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@realmscrape.wmw2fat.mongodb.net/?retryWrites=true&w=majority`;
 
 module.exports = {
   connectToDb: (callback) => {
-    MongoClient.connect("mongodb://127.0.0.1:27017/realmScrape")
+    MongoClient.connect(uri)
       .then((client) => {
-        connection = client.db();
+        connection = client.db("websiteScrape");
         return callback();
       })
       .catch((err) => {
