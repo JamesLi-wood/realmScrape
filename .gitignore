@@ -1,0 +1,8 @@
+# Root.
+.env
+
+# Backend folder.
+/Backend/node_modules
+/Backend/package-lock.json
+
+# Frontend folder.
