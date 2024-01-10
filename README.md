@@ -12,3 +12,4 @@
 
 ## Others
 - dotenv
+- dotenv-cli
