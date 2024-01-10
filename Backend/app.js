@@ -29,31 +29,33 @@ connectToDb((err) => {
 });
 
 // setTimeout(async () => {
-//   await db.collection("characters").insertMany(await getCharacter());
-//   console.log("added");
-// }, 100);
+//   await db
+//     .collection("recentDeaths")
+//     .insertMany(await webScrape.getRecentDeath());
+//   console.log("done");
+// }, 1000);
 
 // setInterval(async () => {
-//   await db.collection("characters").deleteOne();
+//   await db.collection("recentDeaths").deleteOne();
 //   console.log("deleted");
 // }, 100);
 
 setInterval(async () => {
   const websiteRecent = await webScrape.getRecentDeath();
-  const dbRecent = await dbLowestHighest("characters", { deathDate: -1 });
+  const dbRecent = await dbLowestHighest("recentDeaths", { deathDate: -1 });
 
   if (
     websiteRecent.deathDate !== dbRecent.deathDate &&
     websiteRecent.name !== "Private"
   ) {
-    await db.collection("characters").deleteOne({
-      _id: await dbLowestHighest("characters", { deathDate: 1 }).then(
+    await db.collection("recentDeaths").deleteOne({
+      _id: await dbLowestHighest("recentDeaths", { deathDate: 1 }).then(
         (data) => {
           return data._id;
         }
       ),
     });
-    await db.collection("characters").insertOne(websiteRecent);
+    await db.collection("recentDeaths").insertOne(websiteRecent);
 
     const lowestFame = await dbLowestHighest("topDeaths", { baseFame: 1 });
     if (websiteRecent.baseFame > lowestFame.baseFame) {
@@ -77,7 +79,7 @@ app.get("/", (req, res) => {
 app.get("/recentDeaths", async (req, res) => {
   const characters = [];
   await db
-    .collection("characters")
+    .collection("recentDeaths")
     .find()
     .sort({ deathDate: -1 })
     .forEach((chars) => {
