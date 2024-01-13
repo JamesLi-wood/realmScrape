@@ -1,5 +1,4 @@
 const { MongoClient } = require("mongodb");
-require("dotenv").config();
 
 let connection;
 let uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@realmscrape.wmw2fat.mongodb.net/?retryWrites=true&w=majority`;
