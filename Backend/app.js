@@ -66,7 +66,7 @@ setInterval(async () => {
   } else {
     console.log("Nothing happened!");
   }
-}, 5000);
+}, 10000);
 
 app.get("/", (req, res) => {
   res.end("Welcome to realm scrape!");
