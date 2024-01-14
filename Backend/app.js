@@ -63,10 +63,8 @@ setInterval(async () => {
     });
     await db.collection("recentDeaths").insertOne(websiteRecent);
     console.log("A character has been added to the graveyard!");
-  } else {
-    console.log("Nothing happened!");
   }
-}, 5000);
+}, 10000);
 
 app.get("/", (req, res) => {
   res.end("Welcome to realm scrape!");
