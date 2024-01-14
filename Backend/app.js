@@ -38,35 +38,35 @@ connectToDb((err) => {
 //   console.log("deleted");
 // }, 500);
 
-// setInterval(async () => {
-//   const websiteRecent = await webScrape.getRecentDeath();
-//   const dbRecent = await dbLowestHighest("recentDeaths", { deathDate: -1 });
+setInterval(async () => {
+  const websiteRecent = await webScrape.getRecentDeath();
+  const dbRecent = await dbLowestHighest("recentDeaths", { deathDate: -1 });
 
-//   if (
-//     websiteRecent.deathDate !== dbRecent.deathDate &&
-//     websiteRecent.name !== "Private"
-//   ) {
-//     const lowestFame = await dbLowestHighest("topDeaths", { baseFame: 1 });
-//     if (websiteRecent.baseFame > lowestFame.baseFame) {
-//       await db
-//         .collection("topDeaths")
-//         .updateOne({ _id: lowestFame._id }, { $set: websiteRecent });
-//       console.log("A new character has made it in the topDeaths leaderboard!");
-//     }
+  if (
+    websiteRecent.deathDate !== dbRecent.deathDate &&
+    websiteRecent.name !== "Private"
+  ) {
+    const lowestFame = await dbLowestHighest("topDeaths", { baseFame: 1 });
+    if (websiteRecent.baseFame > lowestFame.baseFame) {
+      await db
+        .collection("topDeaths")
+        .updateOne({ _id: lowestFame._id }, { $set: websiteRecent });
+      console.log("A new character has made it in the topDeaths leaderboard!");
+    }
 
-//     await db.collection("recentDeaths").deleteOne({
-//       _id: await dbLowestHighest("recentDeaths", { deathDate: 1 }).then(
-//         (data) => {
-//           return data._id;
-//         }
-//       ),
-//     });
-//     await db.collection("recentDeaths").insertOne(websiteRecent);
-//     console.log("A character has been added to the graveyard!");
-//   } else {
-//     console.log("Nothing happened!");
-//   }
-// }, 5000);
+    await db.collection("recentDeaths").deleteOne({
+      _id: await dbLowestHighest("recentDeaths", { deathDate: 1 }).then(
+        (data) => {
+          return data._id;
+        }
+      ),
+    });
+    await db.collection("recentDeaths").insertOne(websiteRecent);
+    console.log("A character has been added to the graveyard!");
+  } else {
+    console.log("Nothing happened!");
+  }
+}, 5000);
 
 app.get("/", (req, res) => {
   res.end("Welcome to realm scrape!");
