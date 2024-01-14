@@ -2,7 +2,7 @@ const express = require("express");
 const webScrape = require("./scrape");
 const { connectToDb, getDb } = require("./mongo");
 const app = express();
-const port = 5000;
+const port = process.env.PORT;
 
 /**
  * @param {Object} query
