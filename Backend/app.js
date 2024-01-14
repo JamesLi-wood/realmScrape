@@ -2,7 +2,7 @@ const express = require("express");
 const webScrape = require("./scrape");
 const { connectToDb, getDb } = require("./mongo");
 const app = express();
-const port = 5000;
+const port = process.env.PORT;
 
 /**
  * @param {Object} query
@@ -63,10 +63,8 @@ setInterval(async () => {
     });
     await db.collection("recentDeaths").insertOne(websiteRecent);
     console.log("A character has been added to the graveyard!");
-  } else {
-    console.log("Nothing happened!");
   }
-}, 5000);
+}, 10000);
 
 app.get("/", (req, res) => {
   res.end("Welcome to realm scrape!");
