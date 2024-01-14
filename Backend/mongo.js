@@ -12,6 +12,7 @@ module.exports = {
         return callback();
       })
       .catch((err) => {
+        console.log("Connection Failed.");
         return callback(err);
       });
   },
