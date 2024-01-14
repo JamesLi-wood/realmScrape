@@ -9,7 +9,7 @@ module.exports = {
         return callback();
       })
       .catch((err) => {
-        console.log("Connection Failed.");
+        console.log("Connection Failed." + err);
         return callback(err);
       });
   },
