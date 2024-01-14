@@ -17,7 +17,7 @@ async function dbLowestHighest(collection, query) {
     });
 }
 
-console.log(port);
+console.log(process.env.URI);
 // Get database connection.
 let db;
 connectToDb((err) => {
