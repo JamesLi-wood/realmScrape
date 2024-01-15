@@ -3,6 +3,7 @@
 - axios
 - cheerio
 - react
+- node-cron
 
 ## Frameworks used
 - express.js
