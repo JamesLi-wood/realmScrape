@@ -7,8 +7,8 @@ function ping() {
   cron.schedule("*/14 * * * *", () => {
     fetch(process.env.API)
       .then((res) => {
-        if (!response.ok) {
-          throw new Error(`Failed to ping server. Status: ${response.status}`);
+        if (!res.ok) {
+          throw new Error(`Failed to ping server. Status: ${res.status}`);
         }
         console.log("Server pinged successfully!");
       })
