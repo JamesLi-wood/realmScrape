@@ -1,5 +1,6 @@
 # Root.
 .env
+test.js
 
 # Backend folder.
 /Backend/node_modules

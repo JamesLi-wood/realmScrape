@@ -1,6 +1,7 @@
-const express = require("express");
 const webScrape = require("./scrape");
 const { connectToDb, getDb } = require("./mongo");
+const { ping } = require("./ping");
+const express = require("express");
 const app = express();
 const port = process.env.PORT;
 
@@ -28,15 +29,7 @@ connectToDb((err) => {
   }
 });
 
-// setTimeout(async () => {
-//   await db.collection("topDeaths").insertMany(await webScrape.get30());
-//   console.log("done");
-// }, 1000);
-
-// setInterval(async () => {
-//   await db.collection("recentDeaths").deleteOne();
-//   console.log("deleted");
-// }, 500);
+ping();
 
 setInterval(async () => {
   const websiteRecent = await webScrape.getRecentDeath();
