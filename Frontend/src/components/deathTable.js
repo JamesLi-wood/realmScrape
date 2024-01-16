@@ -5,15 +5,12 @@ const DeathTable = (props) => {
   const [backendData, setBackendData] = useState([]);
 
   useEffect(() => {
-    fetch(`https://realmscrape.onrender.com${props.apiRoute}`)
+    fetch(props.apiRoute)
       .then((res) => (res.ok ? res.json() : false))
       .then((data) => {
         setBackendData(data);
       });
   }, [props.apiRoute]);
-
-  console.log(props.apiRoute);
-  console.log(backendData);
 
   function displayHeaders() {
     return (
