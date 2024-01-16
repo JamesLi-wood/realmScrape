@@ -5,7 +5,7 @@ const TopCharacters = () => {
   const [backendData, setBackendData] = useState([]);
 
   useEffect(() => {
-    fetch("/topCharacters")
+    fetch("https://realmscrape.onrender.com/topCharacters")
       .then((res) => (res.ok ? res.json() : false))
       .then((data) => {
         setBackendData(data);
