@@ -10,7 +10,10 @@ const DeathTable = (props) => {
       .then((data) => {
         setBackendData(data);
       });
-  }, []);
+  }, [props.apiRoute]);
+
+  console.log(props.apiRoute);
+  console.log(backendData);
 
   function displayHeaders() {
     return (
