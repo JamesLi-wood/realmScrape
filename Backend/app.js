@@ -4,7 +4,7 @@ const { ping } = require("./ping");
 const express = require("express");
 const app = express();
 const port = process.env.PORT;
-
+const cors = require("cors");
 /**
  * @param {Object} query
  * Query value can either be -1 or 1.
@@ -58,6 +58,8 @@ setInterval(async () => {
     console.log("A character has been added to the graveyard!");
   }
 }, 10000);
+
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.end("Welcome to realm scrape!");
