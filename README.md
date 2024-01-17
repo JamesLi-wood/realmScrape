@@ -4,6 +4,7 @@
 - cheerio
 - react
 - node-cron
+- cors
 
 ## Frameworks used
 - express.js
