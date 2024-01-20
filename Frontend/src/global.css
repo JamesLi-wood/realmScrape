@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Asap&display=swap");
+
+body {
+  background-image: url("./whitePattern.png");
+  background-color: rgb(61, 24, 24);
+  color: white;
+  font-family: "asap";
+}
+
+.guild-name {
+  display: flex;
+  justify-content: center;
+  font-size: 35px;
+  font-weight: bold;
+}
