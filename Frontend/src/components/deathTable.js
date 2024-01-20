@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./deathTable.css";
 
 const DeathTable = (props) => {
-  const [backendData, setBackendData] = useState([]);
+  const [backendData, setBackendData] = useState(false);
 
   useEffect(() => {
     fetch(`https://realmscrape.onrender.com${props.apiRoute}`)
@@ -73,7 +73,7 @@ const DeathTable = (props) => {
           {displayHeaders()}
         </table>
       ) : (
-        <div className="graveyard">We are having trouble receiving data.</div>
+        <div className="loading">Loading . . .</div>
       )}
     </>
   );

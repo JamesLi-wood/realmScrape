@@ -3,24 +3,35 @@ import "./headers.css";
 
 const Header = () => {
   return (
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">HOME</Link>
-          </li>
-          <li>
-            <Link to="/recentDeaths">RECENT DEATHS</Link>
-          </li>
-          <li>
-            <Link to="/topDeaths">TOP DEATHS</Link>
-          </li>
-          <li>
-            <Link to="/topCharacters">TOP CHARACTERS</Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <>
+      <header className="header">
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">
+                <button className="header-button">HOME</button>
+              </Link>
+            </li>
+            <li>
+              <Link to="/recentDeaths">
+                <button className="header-button">RECENT DEATHS</button>
+              </Link>
+            </li>
+            <li>
+              <Link to="/topDeaths">
+                <button className="header-button">TOP DEATHS</button>
+              </Link>
+            </li>
+            <li>
+              <Link to="/topCharacters">
+                <button className="header-button">TOP CHARACTERS</button>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <div className="break"></div>
+    </>
   );
 };
 

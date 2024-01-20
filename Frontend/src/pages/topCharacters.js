@@ -2,7 +2,7 @@ import Header from "../components/headers";
 import { useEffect, useState } from "react";
 
 const TopCharacters = () => {
-  const [backendData, setBackendData] = useState([]);
+  const [backendData, setBackendData] = useState(false);
 
   useEffect(() => {
     fetch("https://realmscrape.onrender.com/topCharacters")
@@ -71,7 +71,7 @@ const TopCharacters = () => {
           {displayHeaders()}
         </table>
       ) : (
-        <div className="graveyard">We are having trouble receiving data.</div>
+        <div className="loading">Loading . . . </div>
       )}
     </>
   );
