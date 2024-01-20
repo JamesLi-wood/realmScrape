@@ -1,3 +1,4 @@
+import "./global.css";
 import Home from "./pages/home";
 import RecentDeaths from "./pages/recentDeaths";
 import TopDeaths from "./pages/topDeaths";
