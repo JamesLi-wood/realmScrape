@@ -27,6 +27,11 @@ const Header = () => {
                 <button className="header-button">TOP CHARACTERS</button>
               </Link>
             </li>
+            <li>
+              <Link to="/ppeContest">
+                <button className="header-button">PPE CONTEST</button>
+              </Link>
+            </li>
           </ul>
         </nav>
       </header>
