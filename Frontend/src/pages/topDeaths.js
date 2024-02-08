@@ -5,7 +5,7 @@ const TopDeaths = () => {
   return (
     <>
       <Header />
-      <div className="guild-name">Top Deaths</div>
+      <h1 className="h1-title">Top Deaths</h1>
       <DeathTable apiRoute={"/topDeaths"} />
     </>
   );

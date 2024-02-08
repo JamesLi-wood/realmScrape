@@ -5,7 +5,7 @@ const RecentDeaths = () => {
   return (
     <>
       <Header />
-      <div className="guild-name">Recent Deaths</div>
+      <h1 className="h1-title">Recent Deaths</h1>
       <DeathTable apiRoute={"/recentDeaths"} />
     </>
   );

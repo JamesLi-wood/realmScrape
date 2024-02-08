@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <div className="guild-name">Welcome to the FriendSHlP Guild!</div>
+      <h1 className="h1-title">Welcome to the FriendSHlP Guild!</h1>
     </>
   );
 };
